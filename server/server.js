@@ -140,6 +140,30 @@ app.get('/day', async (req, res) => {
 });
 
 /**
+ * * @swagger
+ * * /say:
+ * *    get:
+ * *      description: Testing the functions from AWS
+ * *      produces:
+ * *      - application/json
+ * *      responses:
+ * *         200:
+ * *         description: The say
+ * */
+
+app.get('/say', async (req, res) => {
+        let conn;
+        try {
+                conn = pool.getConnection();
+                const results = await pool.query('Select Cust_Code, Cust_City from customer');
+                res.setHeader('Content-Type', 'text/plain');
+                res.json(results);
+        } catch (err) {
+                throw err;
+        }
+});
+
+/**
  * @swagger
  * /customer:
  *    post:
