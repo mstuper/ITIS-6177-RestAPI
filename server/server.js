@@ -154,11 +154,22 @@ app.get('/day', async (req, res) => {
 
 
 
-app.get('/say', (req, res) => {
-	const keyword = req.query.keyword;
-	res.setHeader('Content-Type', 'text/plain');
-	res.send(keyword);
-        
+//app.get('/say', (req, res) => {
+	//const keyword = req.query.keyword;
+	//res.setHeader('Content-Type', 'text/plain');
+	//res.send(keyword);
+
+//});
+
+app.get('/say', async (req, res) => {
+    
+	try {
+        const keyword = await axios.get("https://mehdx6rjcgoec3ty4chl32djma0gobuw.lambda-url.us-east-1.on.aws/")
+        res.json(keyword.data)
+    }
+    catch (err) {
+        console.log(err)
+    }
 });
 
 /**
