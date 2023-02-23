@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const cors = require('cors');
 const swaggerJsDoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
+const axios = require('axios');
 
 const port = process.env.PORT | 3000;
 
@@ -151,16 +152,13 @@ app.get('/day', async (req, res) => {
  * *         description: The say
  * */
 
-app.get('/say', async (req, res) => {
-        let conn;
-        try {
-                conn = pool.getConnection();
-                const results = await pool.query('Select Cust_Code, Cust_City from customer');
-                res.setHeader('Content-Type', 'text/plain');
-                res.json(results);
-        } catch (err) {
-                throw err;
-        }
+
+
+app.get('/say', (req, res) => {
+	const keyword = req.query.keyword;
+	res.setHeader('Content-Type', 'text/plain');
+	res.send(keyword);
+        
 });
 
 /**
