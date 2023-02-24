@@ -65,6 +65,7 @@ app.get('/agents', async (req, res) => {
                 res.json(results);
         } catch (err) {
                 throw err;
+		res.status(500).send('Internal Server Error');
         }
 });
 
@@ -89,6 +90,7 @@ app.get('/company', async (req, res) => {
                 res.json(results);
         } catch (err) {
                 throw err;
+		res.status(500).send('Internal Server Error');
         }
 });
 
@@ -113,6 +115,7 @@ app.get('/customers', async (req, res) => {
                 res.json(results);
         } catch (err) {
                 throw err;
+		res.status(500).send('Internal Server Error');
         }
 });
 
@@ -137,6 +140,7 @@ app.get('/day', async (req, res) => {
                 res.json(results);
         } catch (err) {
                 throw err;
+		res.status(500).send('Internal Server Error');
         }
 });
 
@@ -153,24 +157,17 @@ app.get('/day', async (req, res) => {
  * */
 
 
-
-//app.get('/say', (req, res) => {
-	//const keyword = req.query.keyword;
-	//res.setHeader('Content-Type', 'text/plain');
-	//res.send(keyword);
-
-//});
-
 app.get('/say', async (req, res) => {
-    
-	try {
-        const keyword = await axios.get("https://mehdx6rjcgoec3ty4chl32djma0gobuw.lambda-url.us-east-1.on.aws/")
-        res.json(keyword.data)
-    }
-    catch (err) {
-        console.log(err)
-    }
+  try {
+    const keyword = req.query.keyword;
+    const response = await axios.get('https://yr5r7z34xptxkhlko3e66ia76m0etwkj.lambda-url.us-east-1.on.aws/?keyword=' + keyword);
+    res.send(response.data);
+  } catch (err) {
+    	throw err;
+   	 res.status(500).send('Internal Server Error');
+  }
 });
+
 
 /**
  * @swagger
