@@ -44,6 +44,11 @@ const pool = mariadb.createPool({
         connectionLimit: 5
 });
 
+app.get('/', (req, res) => {
+  res.send('My droplet page');
+});
+
+
 /**
  * @swagger
  * /agents:
