@@ -160,8 +160,8 @@ app.get('/day', async (req, res) => {
 app.get('/say', async (req, res) => {
   try {
     const keyword = req.query.keyword;
-    const response = await axios.get('https://yr5r7z34xptxkhlko3e66ia76m0etwkj.lambda-url.us-east-1.on.aws/?keyword=' + keyword);
-    res.send(response.data);
+    const results = await axios.get('https://yr5r7z34xptxkhlko3e66ia76m0etwkj.lambda-url.us-east-1.on.aws/?keyword=' + keyword);
+    res.json(results.data);
   } catch (err) {
     	throw err;
    	 res.status(500).send('Internal Server Error');
